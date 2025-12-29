@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using MobileApp2.Components.Service;
+using MobileApp2.Services;
+
 
 namespace MobileApp2
 {
@@ -20,7 +22,7 @@ namespace MobileApp2
 #if DEBUG
     		builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();
-            builder.Services.AddSingleton<ProductService>();
+            builder.Services.AddSingleton<IProductService, ProductService>();
 #endif
 
             return builder.Build();
