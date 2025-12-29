@@ -1,0 +1,15 @@
+﻿@using MobileApp2.Model
+<div>
+    <ul>
+        <li>Images: @Product.Image</li>
+        <li>Name: @Product.Name</li>
+        <li>Price: @Product.Price</li>
+        <li>Description: @Product.Description</li>
+    </ul>
+</div>
+
+
+@code {
+    [Parameter]
+    public Product Product { get; set; }
+}

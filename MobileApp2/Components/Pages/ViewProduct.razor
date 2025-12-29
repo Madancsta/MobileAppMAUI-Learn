@@ -1,0 +1,37 @@
+﻿@page "/viewProduct/{Id:int}"
+@using MobileApp2.Model
+@inject ProductService ProductService
+
+<h3>View Product</h3>
+
+@if (product == null)
+{
+    <p class="text-danger">Product not found.</p>
+}
+else
+{
+    <div class="card p-3">
+        <h4>@product.Name</h4>
+        <p><strong>Price:</strong> $@product.Price</p>
+        <p><strong>Description:</strong> @product.Description</p>
+        <p>
+            <strong>Image:</strong>@if (!string.IsNullOrEmpty(product.Image))
+            {
+                <img src="@product.Image" width="200" />
+            }
+        </p>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Product? product;
+
+    protected override void OnInitialized()
+    {
+        // product = ProductStore.Products.FirstOrDefault(p => p.Id == Id);
+        product = ProductService.GetProductById(Id);
+    }
+}

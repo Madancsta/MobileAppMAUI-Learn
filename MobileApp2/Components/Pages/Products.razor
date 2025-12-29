@@ -1,0 +1,45 @@
+﻿@* @page "/products"
+@layout ProductLayout
+@using MobileApp2.Components.Shared
+@using MobileApp2.Model
+
+<h3>Products</h3>
+<a class="btn btn-success mb-3" href="/editProduct">Add Product</a>
+<div class="d-flex flex-wrap">
+    @foreach (var product in ProductStore.Products)
+    {
+        <a class="list-group-item list-group-item-action"
+           href="/viewProduct/@product.Id">
+            <strong>@product.Name</strong> - $@product.Price
+        </a>
+    }
+</div> *@
+
+@page "/products"
+@inject ProductService ProductService
+
+<h3>Products</h3>
+
+<a class="btn btn-success mb-3" href="/product">Add Product</a>
+
+@foreach (var product in ProductService.GetProducts())
+{
+    <div class="card p-2 mb-2">
+        <strong>@product.Name</strong> - $@product.Price
+        <div>
+            <a href="/viewProduct/@product.Id" class="btn btn-info btn-sm">View</a>
+            <a href="/product/@product.Id" class="btn btn-warning btn-sm">Edit</a>
+            <button class="btn btn-danger btn-sm"
+                    @onclick="() => Delete(product.Id)">
+                Delete
+            </button>
+        </div>
+    </div>
+}
+
+@code {
+    private void Delete(int id)
+    {
+        ProductService.DeleteProduct(id);
+    }
+}
