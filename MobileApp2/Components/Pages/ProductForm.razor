@@ -95,6 +95,16 @@
     private Product product = new();
     private bool isEdit => Id.HasValue;
 
+    private async Task<bool> ShowConfirmAlert()
+    {
+        return await Application.Current!.MainPage!.DisplayAlert(
+            "Confirm Message",
+            "Are you sure you want to Save?",
+            "Yes",
+            "No"
+        );
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -109,6 +119,10 @@
 
     private async Task SaveProduct()
     {
+        bool confirmation = await ShowConfirmAlert();
+
+        if (!confirmation)
+            return;
         // 🔥 Get HTML from Quill
         product.Description = await JS.InvokeAsync<string>("getQuillHtml");
 
