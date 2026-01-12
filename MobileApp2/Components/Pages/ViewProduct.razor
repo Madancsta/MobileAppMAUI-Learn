@@ -14,7 +14,7 @@ else
     <div class="card p-3">
         <h4>@product.Name</h4>
         <p><strong>Price:</strong> $@product.Price</p>
-        <p><strong>Description:</strong> @product.Description</p>
+        <p><strong>Description:</strong> @((MarkupString)product.Description)</p>
         <p>
             <strong>Image:</strong>@if (!string.IsNullOrEmpty(product.Image))
             {

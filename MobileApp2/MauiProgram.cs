@@ -22,6 +22,7 @@ namespace MobileApp2
 #if DEBUG
     		builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();
+            builder.Services.AddSingleton<ProductService>();
             builder.Services.AddSingleton<IProductService, ProductService>();
 #endif
 
